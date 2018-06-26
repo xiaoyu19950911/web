@@ -26,10 +26,39 @@ spring:
             remove-abandoned-timeout: 120
             pool-prepared-statements: true
   redis:
-      database: 0
-      host: 127.0.0.1
+      database: 1
+      host: 47.98.108.55
+      password: 123456
+  jpa:
+      open-in-view: true
+      hibernate:
+        ddl-auto: update
+      show-sql: true
   security:
+    oauth2:
+      client:
+        registration:
+          my-client-1:
+            client-id: client_1
+            client-secret: 123456
+            client-scop: select
+            authorization-grant-type: client_credentials
+            client-authentication-method: basic
+            #provider: my-oauth-provider
+          my-client-2:
+            client-id: client_2
+            client-secret: 123456
+            client-scop: select
+            authorization-grant-type: password
+        provider:
+          my-oauth-provider:
+            authorization-url: /oauth/authorize
+            token-uri: /oauth/token
+            user-info-uri: /userinfo
+            jwk-set-uri: /token_keys
+            user-name-attribute: order
     filter:
       order: 3
 server:
-  port: 80
+  port: 8080
+
